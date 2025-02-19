@@ -34,6 +34,8 @@ spec:
     finally:
     - name: show-sbom
       params:
+      - name: BUILDAH_FORMAT
+        value: docker
       - name: IMAGE_URL
         value: $(tasks.build-image-index.results.IMAGE_URL)
       taskRef:
@@ -41,7 +43,7 @@ spec:
         - name: name
           value: show-sbom
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-show-sbom:0.1@sha256:945a7c9066d3e0a95d3fddb7e8a6992e4d632a2a75d8f3a9bd2ff2fef0ec9aa0
+          value: quay.io/arewm/show-sbom:docker-manifest-support@sha256:c8d27a248d3bce1338c5161912a69ec15e9623186c31252dbf6f8d6f56adf2bc
         - name: kind
           value: task
         resolver: bundles
@@ -231,6 +233,8 @@ spec:
         - "true"
     - name: build-image-index
       params:
+      # - name: BUILDAH_FORMAT
+      #  value: docker
       - name: IMAGE
         value: $(params.output-image)
       - name: COMMIT_SHA
@@ -249,7 +253,7 @@ spec:
         - name: name
           value: build-image-index
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-build-image-index:0.1@sha256:0c2270d1b24fcbaa6fe82b6d045b715a5f24f55d099a10f65297671e2ee421e6
+          value: quay.io/arewm/build-image-index:docker-manifest-support@sha256:546ad901791c14c1f7a36fc78bb2dcbde61eac0a03a728ce1c939200bb2e6003
         - name: kind
           value: task
         resolver: bundles
